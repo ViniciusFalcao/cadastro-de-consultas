@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-cadastrar',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastrarComponent implements OnInit {
 
+
+  cadastros:any[]=[
+
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
+
+
+  }
+  postar(){
+
+
   }
 
 }
