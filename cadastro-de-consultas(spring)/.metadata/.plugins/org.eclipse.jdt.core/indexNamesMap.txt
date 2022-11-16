@@ -1,3 +1,0 @@
-INDEX VERSION 1.131
-file:/C:/Users/vinic/OneDrive/Área%20de%20Trabalho/Cadastro%20de%20consulta/cadastro-de-consultas(spring)/.metadata/.plugins/org.eclipse.jdt.core/1865797976.index
-meta_index
