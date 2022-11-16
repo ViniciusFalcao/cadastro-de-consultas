@@ -1,4 +1,9 @@
+import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Consulta } from './../../models/consulta';
 import { Component, OnInit } from '@angular/core';
+import { ConsultasServiceService } from 'src/app/services/consultas-service.service';
+import { concatMap, filter, map, Observable } from 'rxjs';
 
 
 @Component({
@@ -8,16 +13,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultasComponent implements OnInit {
 
-  consultas:any[]=[
-    {id:1,nome:'Vinicius Canuto Falcão',data:'2/11/2022',hora:'13:30',cpf:'6678686432'},
-    {id:2,nome:'Vinicius Canuto Falcão',data:'2/11/2022',hora:'13:40',cpf:'6678686432'},
-    {id:3,nome:'Vinicius Canuto Falcão',data:'2/11/2022',hora:'13:50',cpf:'6678686432'}
+  consultas: Observable<Consulta[]>;
 
-  ];
-
-  constructor() { }
+  constructor(private cService: ConsultasServiceService, private snack: MatSnackBar, private location: Location) {
+    this.consultas = this.cService.list();
+  }
 
   ngOnInit(): void {
+
+  }
+  cancelConsulta(id: number) {
+    //filtra o array para todos que não tem o id passado pelo parametro
+
+    this.consultas = this.consultas.pipe(map(consul => consul.filter(consul => consul.id != id)))
+    this.cService.deleteId(id)
+      .subscribe(succes => this.succesSnack('Consulta cancelada com sucesso', 'Fechar'), fail => this.failSnack('Falha ao cancelar consulta', 'Fechar'))
+        
+  }
+
+  succesSnack(msg: string, action: string) {
+
+    this.snack.open(msg, action, { duration: 3000, panelClass: 'succes' });
+
+
+  }
+  failSnack(msg: string, action: string) {
+
+    this.snack.open(msg, action, { duration: 3000, panelClass: 'fail' });
+
+
+  }
+  onEdit(consulta: Consulta) {
+
+
+
   }
 
 }

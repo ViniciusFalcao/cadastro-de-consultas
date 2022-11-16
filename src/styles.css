@@ -2,3 +2,16 @@
 body{
   background-color: #dee2e6;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.succes{
+  background-color: #d4edda;
+  color: black;
+
+}
+.fail{
+  background-color:#f8d7da;
+  color: black;
+
+}

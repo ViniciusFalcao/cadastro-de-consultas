@@ -1,3 +1,52 @@
 .tabela{
   margin-top: 3rem;
+
+}
+
+th{
+  width: 30px;
+}
+.div__actions{
+  display: flex;
+
+}
+button{
+  margin-left: 2rem;
+  margin-top: 0.2rem;
+}
+p{
+  margin-top: 10px;
+}
+@media screen and (max-width:1000px) {
+  .card-body{
+    padding: 0;
+  }
+  .col__cpf{
+    display: none;
+  }
+  .div__actions{
+    display: flex;
+    flex-direction: column;
+  }
+  button{
+    margin-left: 0.3rem;
+    width: 70px;
+    font-size: x-small;
+  }
+
+}
+@media screen and (max-width:683px) {
+  tbody{
+    font-size: small;
+  }
+
+  .col__hora{
+    width: 15px;
+  }
+  .col__act{
+    width: 10px;
+  }
+  .div__actions{
+    width: 40px;
+  }
 }
