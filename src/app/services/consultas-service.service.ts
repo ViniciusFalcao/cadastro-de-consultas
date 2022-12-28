@@ -24,7 +24,7 @@ export class ConsultasServiceService {
 
 
   list(){
-    return this.httpClient.get<Consulta[]>('http://localhost:8080/');
+    return this.httpClient.get<Consulta[]>('http://localhost:8080/listar');
   }
 
   save(consulta:any){
