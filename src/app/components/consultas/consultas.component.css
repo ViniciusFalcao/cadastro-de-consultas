@@ -1,6 +1,13 @@
 .tabela{
-  margin-top: 3rem;
+  margin-top: 1rem;
 
+}
+.search{
+  width: 300px;
+  margin-left: 60%;
+}
+.div__busca{
+  margin-top: 1rem;
 }
 
 th{

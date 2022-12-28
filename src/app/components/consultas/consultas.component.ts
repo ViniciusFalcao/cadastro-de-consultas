@@ -13,13 +13,32 @@ import { concatMap, filter, map, Observable } from 'rxjs';
 })
 export class ConsultasComponent implements OnInit {
 
+  busca: string = ''
+
   consultas: Observable<Consulta[]>;
+  consultaFiltro: Observable<Consulta[]>;
 
   constructor(private cService: ConsultasServiceService, private snack: MatSnackBar, private location: Location) {
     this.consultas = this.cService.list();
+    this.consultaFiltro = this.consultas;
+
   }
 
   ngOnInit(): void {
+
+  }
+  reset(){
+    this.consultaFiltro=this.consultas;
+  }
+  buscaCadastro(query: string) {
+    if (query == '') {
+      this.consultaFiltro = this.consultas;
+
+    }else{
+      this.consultaFiltro = this.consultas.pipe(map(c => c.filter(c => c.nome.toLowerCase().includes(query.toLowerCase()))));
+
+    }
+
 
   }
   cancelConsulta(id: number) {
@@ -28,7 +47,7 @@ export class ConsultasComponent implements OnInit {
     this.consultas = this.consultas.pipe(map(consul => consul.filter(consul => consul.id != id)))
     this.cService.deleteId(id)
       .subscribe(succes => this.succesSnack('Consulta cancelada com sucesso', 'Fechar'), fail => this.failSnack('Falha ao cancelar consulta', 'Fechar'))
-        
+
   }
 
   succesSnack(msg: string, action: string) {
@@ -43,10 +62,6 @@ export class ConsultasComponent implements OnInit {
 
 
   }
-  onEdit(consulta: Consulta) {
 
-
-
-  }
 
 }

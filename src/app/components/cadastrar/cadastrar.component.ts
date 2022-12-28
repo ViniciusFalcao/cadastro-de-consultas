@@ -52,11 +52,12 @@ export class CadastrarComponent implements OnInit {
 
   validaNome(control: AbstractControl) {
     let campo = control.value as string;
-    const regex = /[0-9]/;
-    const regex2=/[^a-zA-Z 0-9]+/g
+    const regex2=/[^a-zA-Z\u00C0-\u00FF ]+/i
+
     //se tiver números ou caracteres especiais aponta erro
-    if(regex2.test(campo)||regex.test(campo) && campo!='' ){
-      return{nomeInvalido:true}
+    if(regex2.test(campo) && campo!='' ){
+        return{nomeInvalido:true}
+
     }
 
 

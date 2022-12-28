@@ -1,5 +1,19 @@
 <div class="card">
   <div class="card-body">
+    <div class="d-flex div__busca">
+      <button mat-raised-button color="secondary" (click)="reset()" style="margin-left:0px ;">Mostrar todas consultas</button>
+
+
+      <input
+        class="form-control me-2 search"
+        [(ngModel)]="busca"
+        type="search"
+        placeholder="Digite um nome"
+        aria-label="Search"
+      />
+      <button mat-raised-button (click)="buscaCadastro(busca)">Buscar</button>
+
+    </div>
     <table class="table table-dark table-striped-columns tabela">
       <thead>
         <tr>
@@ -11,15 +25,35 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let consulta of consultas | async">
-          <td><p>{{ consulta.nome }}</p></td>
-          <td><p>{{ consulta.data | date : 'dd/MM/yyyy' }}</p></td>
-          <td class="col__hora"><p>{{ consulta.hora }}</p></td>
-          <td class="col__cpf"><p>{{ consulta.cpf }}</p></td>
+        <tr *ngFor="let consulta of consultaFiltro | async">
+          <td>
+            <p>{{ consulta.nome }}</p>
+          </td>
+          <td>
+            <p>{{ consulta.data | date: "dd/MM/yyyy" }}</p>
+          </td>
+          <td class="col__hora">
+            <p>{{ consulta.hora }}</p>
+          </td>
+          <td class="col__cpf">
+            <p>{{ consulta.cpf }}</p>
+          </td>
           <td class="col__act">
             <div class="div__actions">
-              <button mat-stroked-button color="accent" routerLink="/remarcar/{{consulta.id}}">Remarcar</button>
-              <button mat-stroked-button (click)="cancelConsulta(consulta.id)" color="warn">Cancelar</button>
+              <button
+                mat-stroked-button
+                color="accent"
+                routerLink="/remarcar/{{ consulta.id }}"
+              >
+                Remarcar
+              </button>
+              <button
+                mat-stroked-button
+                (click)="cancelConsulta(consulta.id)"
+                color="warn"
+              >
+                Cancelar
+              </button>
             </div>
           </td>
         </tr>

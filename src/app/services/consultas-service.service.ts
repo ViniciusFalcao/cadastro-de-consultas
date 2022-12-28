@@ -24,25 +24,25 @@ export class ConsultasServiceService {
 
 
   list(){
-    return this.httpClient.get<Consulta[]>('api/');
+    return this.httpClient.get<Consulta[]>('http://localhost:8080/');
   }
 
   save(consulta:any){
 
-    return this.httpClient.post<Consulta>('api/cadastrar',consulta).pipe(first());
+    return this.httpClient.post<Consulta>('http://localhost:8080/cadastrar',consulta).pipe(first());
 
   }
 
   deleteId(id:number){
-    return this.httpClient.delete(`api/deletar/${id}`).pipe(first())
+    return this.httpClient.delete(`http://localhost:8080/deletar/${id}`).pipe(first())
   }
 
   findId(id:number){
-    return this.httpClient.get<Consulta>(`api/remarcar/${id}`)
+    return this.httpClient.get<Consulta>(`http://localhost:8080/remarcar/${id}`)
 
   }
   put(cadastro:any){
-    return this.httpClient.put<Consulta>(`api/remarcar`,cadastro)
+    return this.httpClient.put<Consulta>(`http://localhost:8080/remarcar`,cadastro)
 
   }
 }
