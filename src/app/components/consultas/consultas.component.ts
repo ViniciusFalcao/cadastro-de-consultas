@@ -27,14 +27,14 @@ export class ConsultasComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  reset(){
-    this.consultaFiltro=this.consultas;
+  reset() {
+    this.consultaFiltro = this.consultas;
   }
   buscaCadastro(query: string) {
     if (query == '') {
       this.consultaFiltro = this.consultas;
 
-    }else{
+    } else {
       this.consultaFiltro = this.consultas.pipe(map(c => c.filter(c => c.nome.toLowerCase().includes(query.toLowerCase()))));
 
     }
@@ -42,12 +42,16 @@ export class ConsultasComponent implements OnInit {
 
   }
   cancelConsulta(id: number) {
-    //filtra o array para todos que não tem o id passado pelo parametro
+      this.cService.deleteId(id)
+        .pipe(
+          map(() => this.cService.list())
+        )
+        .subscribe(consultas => {
+          this.consultas = consultas;
+          this.consultaFiltro = consultas;
+          this.succesSnack('Consulta cancelada com sucesso', 'Fechar')
 
-    this.consultas = this.consultas.pipe(map(consul => consul.filter(consul => consul.id != id)))
-    this.cService.deleteId(id)
-      .subscribe(succes => this.succesSnack('Consulta cancelada com sucesso', 'Fechar'), fail => this.failSnack('Falha ao cancelar consulta', 'Fechar'))
-
+        },()=>this.failSnack('Falha ao cancelar consulta', 'Fechar'));
   }
 
   succesSnack(msg: string, action: string) {

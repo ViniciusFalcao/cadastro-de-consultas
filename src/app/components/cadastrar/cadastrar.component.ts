@@ -83,7 +83,9 @@ export class CadastrarComponent implements OnInit {
 
   onSubmit() {
     this.cService.save(this.form.value)
-      .subscribe(succes => { this.succesSnack('Cadastrado com sucesso', 'Fechar'); this.form.reset() }, fail => this.failSnack('Houve uma falha ao cadastrar: ', 'Fechar'));
+      .subscribe(succes => { this.succesSnack('Cadastrado com sucesso', 'Fechar'); this.form.reset();setTimeout(() => {
+
+        this.location.back()},2000); }, fail => this.failSnack('Houve uma falha ao cadastrar: ', 'Fechar'));
 
   }
   onCancel() {
